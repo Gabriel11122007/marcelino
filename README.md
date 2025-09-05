@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marcelinos Conveniência — Monte Alto</title>
+  <meta name="description" content="Loja de conveniência 24h em Monte Alto. Lanches, bebidas, snacks e muito mais com rapidez e praticidade." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --bg:#E0CCAC;            /* marrom claro (90% do fundo) */
+      --text:#AB650A;          /* marrom escuro (texto principal) */
+      --accent:#FFC65C;        /* amarelo queimado (CTAs) */
+      --accent-2:#3A6B35;      /* verde suave (ações positivas) */
+      --danger:#C0392B;        /* selo promo */
+      --white:#FFFFFF;
+      --ink:#4a2e07;           /* tom ainda mais escuro para contraste */
+      --card:#fff8ec;          /* leve variação do fundo para cards */
+      --shadow:0 8px 24px rgba(0,0,0,.12);
+      --radius:16px;
+    }
+
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text); font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{width:min(1100px, 92vw); margin-inline:auto}
+
+    /* Header */
+    .skip{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+    .skip:focus{left:1rem; top:1rem; width:auto; height:auto; padding:.5rem .75rem; background:var(--white); color:var(--ink); border-radius:.5rem; box-shadow:var(--shadow)}
+
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(8px);
+      background:color-mix(in srgb, var(--bg) 82%, white 18%);
+      border-bottom:1px solid color-mix(in srgb, var(--text) 15%, transparent);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.75rem 0}
+    .brand{display:flex; align-items:center; gap:.75rem; font-family:Poppins,Inter,sans-serif}
+    .logo{width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,var(--accent),#ffd98f); display:grid; place-items:center; color:var(--ink); font-weight:800}
+    .brand h1{font-size:1.15rem; line-height:1; margin:0}
+
+    nav ul{display:flex; gap:1rem; list-style:none; margin:0; padding:0; align-items:center}
+    nav a{padding:.55rem .8rem; border-radius:999px; font-weight:600}
+    nav a:hover{background:color-mix(in srgb, var(--accent) 28%, transparent)}
+
+    .actions{display:flex; gap:.5rem}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.7rem 1rem; border-radius:999px; border:none; cursor:pointer; font-weight:700}
+    .btn-primary{background:var(--accent); color:var(--ink); box-shadow:var(--shadow)}
+    .btn-outline{background:transparent; color:var(--text); outline:1.5px solid color-mix(in srgb, var(--text) 28%, transparent)}
+    .icon{width:20px; height:20px}
+
+    /* Mobile menu */
+    .hamb{display:none; background:transparent; border:none; padding:.5rem; border-radius:.75rem}
+    @media (max-width: 820px){
+      nav ul{display:none}
+      .hamb{display:inline-grid}
+      .drawer{position:fixed; inset:0 0 auto auto; width:min(86vw,360px); height:100dvh; background:var(--white); color:var(--ink); box-shadow:var(--shadow); transform:translateX(100%); transition:.3s transform ease; padding:1rem}
+      .drawer.open{transform:translateX(0)}
+      .drawer a{display:block; padding:.9rem 0; border-bottom:1px solid #eee}
+    }
+
+    /* Hero */
+    .hero{padding:clamp(2rem, 4vw, 4rem) 0}
+    .hero-wrap{display:grid; gap:2rem; grid-template-columns: 1fr .88fr; align-items:center}
+    .title{font-family:Poppins,Inter,sans-serif; font-size:clamp(1.8rem, 3.6vw, 3rem); line-height:1.15; margin:0 0 .75rem}
+    .lead{max-width:52ch}
+    .cta{margin-top:1rem; display:flex; gap:.75rem; flex-wrap:wrap}
+    .hero-card{background:var(--card); padding:1rem; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid color-mix(in srgb, var(--text) 10%, transparent)}
+    .hero-illus{aspect-ratio:4/3; border-radius:var(--radius); background:repeating-linear-gradient(135deg, #f7ead4 0 22px, #f3e1c3 22px 44px); display:grid; place-items:center; color:var(--ink); font-weight:800}
+
+    @media (max-width: 940px){
+      .hero-wrap{grid-template-columns:1fr}
+    }
+
+    /* Sections */
+    section{padding:clamp(1.5rem,3vw,2.5rem) 0}
+    .section-title{font-family:Poppins,Inter,sans-serif; font-size:clamp(1.2rem,2.4vw,1.8rem); margin:0 0 1rem}
+    .muted{opacity:.9}
+
+    /* Products */
+    .grid{display:grid; gap:1rem}
+    .products{grid-template-columns:repeat(4,1fr)}
+    @media (max-width: 1100px){.products{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width: 760px){.products{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width: 520px){.products{grid-template-columns:1fr}}
+
+    .card{background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; border:1px solid #eee; display:flex; flex-direction:column}
+    .thumb{aspect-ratio:4/3; background:linear-gradient(135deg,#ffe6b8,#fff3d6); display:grid; place-items:center; color:var(--ink); font-weight:800}
+    .content{padding:.9rem}
+    .price{font-weight:800; color:var(--accent-2)}
+    .add{margin-top:auto; padding:.9rem; display:flex; gap:.5rem}
+
+    /* Offers */
+    .offers{grid-template-columns: repeat(3,1fr)}
+    @media (max-width: 900px){.offers{grid-template-columns:1fr}}
+    .offer{position:relative; background:var(--card); padding:1rem; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid color-mix(in srgb, var(--text) 10%, transparent)}
+    .badge{position:absolute; top:12px; left:12px; background:var(--danger); color:white; font-weight:800; padding:.35rem .6rem; border-radius:999px; font-size:.8rem}
+
+    /* About */
+    .split{display:grid; gap:1rem; grid-template-columns:1.1fr .9fr}
+    @media (max-width: 880px){.split{grid-template-columns:1fr}}
+    .photo{aspect-ratio:16/9; border-radius:var(--radius); background:linear-gradient(135deg,#fff3db,#ffe9c0); box-shadow:var(--shadow);}
+
+    /* Footer */
+    footer{margin-top:2rem; background:color-mix(in srgb, var(--text) 20%, var(--bg)); color:var(--ink); border-top:1px solid color-mix(in srgb, var(--text) 25%, transparent)}
+    .foot{display:grid; gap:1rem; grid-template-columns: 1.2fr .8fr}
+    @media (max-width: 900px){.foot{grid-template-columns:1fr}}
+    .foot small{opacity:.8}
+
+    /* Cart drawer */
+    .cart{position:fixed; right:0; top:0; width:min(420px,92vw); height:100dvh; background:var(--white); color:var(--ink); box-shadow:var(--shadow); transform:translateX(100%); transition:.3s ease-in-out; z-index:60; display:flex; flex-direction:column}
+    .cart.open{transform:translateX(0)}
+    .cart header{position:sticky; top:0; background:var(--white); border-bottom:1px solid #eee}
+    .cart header .nav{padding:1rem}
+    .cart-items{flex:1; overflow:auto; padding:1rem; display:grid; gap:.75rem}
+    .cart-item{display:grid; grid-template-columns:56px 1fr auto; gap:.75rem; align-items:center; border:1px solid #f1f1f1; border-radius:12px; padding:.5rem}
+    .cart footer{padding:1rem; background:#fafafa; border-top:1px solid #eee}
+    .cart-total{display:flex; align-items:center; justify-content:space-between; font-weight:800}
+
+    /* Utility */
+    .sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); border:0}
+  </style>
+  
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+
+    <aside class="hidden md:flex fixed top-0 left-0 h-full w-56 bg-[#AB650A] text-white flex-col items-center py-10 space-y-6 shadow-xl z-50">
+    <h1 class="text-2xl font-bold">Marcelinos</h1>
+    <nav class="flex flex-col gap-4 text-lg">
+      <a href="#home" class="hover:underline hover:no-underline">Início</a>
+      <a href="#produtos" class="hover:underline hover:no-underline">Produtos</a>
+      <a href="#ofertas" class="hover:underline hover:no-underline">Ofertas</a>
+      <a href="#sobre" class="hover:underline hover:no-underline">Sobre</a>
+      <a href="#contato" class="hover:underline hover:no-underline">Contato</a>
+    </nav>
+  </aside>
+<main class="md:ml-56">
+ 
+    <!-- HERO -->
+     <section id="home" class="relative h-[80vh] flex items-center justify-center">
+      <div class="container hero-wrap pr-4 pl-4">
+        <div class="hero-card">
+          <h2 class="title">Aberta 24 horas — praticidade que combina com seu ritmo</h2>
+          <p class="lead">Na <strong>Marcelinos Conveniência</strong> você encontra lanches, bebidas, snacks e itens essenciais. Atendimento ágil em <strong>Monte Alto</strong> e ofertas que cabem no bolso.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#produtos">Explorar produtos</a>
+            <a class="btn btn-outline" href="#ofertas">Ver ofertas</a>
+          </div>
+        </div>
+        <div class="hero-illus" aria-hidden="true">Lanches • Bebidas • Snacks</div>
+      </div>
+    </section>
+
+      <nav id="mobileNav" class="mobile-hide fixed bottom-0 left-0 w-full bg-[#AB650A] text-white flex md:hidden justify-around items-center py-3 shadow-lg z-50">
+    <a href="#home">🏠</a>
+    <a href="#produtos">🛒</a>
+    <a href="#ofertas">🔥</a>
+    <a href="#sobre">ℹ️</a>
+    <a href="#contato">📞</a>
+  </nav>
+
+    <!-- PRODUTOS -->
+    <section id="produtos" class="py-16 px-6 md:px-12">
+      <h3 class="section-title">Produtos em destaque</h3>
+      <div class="grid products">
+        <!-- Card 1 -->
+        <article class="card" data-name="Água Mineral 500ml" data-price="3.90">
+          <div class="thumb">Água Mineral</div>
+          <div class="content">
+            <h4>Água Mineral 500ml</h4>
+            <p class="price">R$ 3,90</p>
+          </div>
+          <div class="add"><button class="btn btn-primary add-to-cart">Adicionar</button></div>
+        </article>
+        <!-- Card 2 -->
+        <article class="card" data-name="Refrigerante Lata" data-price="6.50">
+          <div class="thumb">Refrigerante</div>
+          <div class="content">
+            <h4>Refrigerante Lata 350ml</h4>
+            <p class="price">R$ 6,50</p>
+          </div>
+          <div class="add"><button class="btn btn-primary add-to-cart">Adicionar</button></div>
+        </article>
+        <!-- Card 3 -->
+        <article class="card" data-name="Sanduíche Natural" data-price="12.90">
+          <div class="thumb">Sanduíche</div>
+          <div class="content">
+            <h4>Sanduíche Natural</h4>
+            <p class="price">R$ 12,90</p>
+          </div>
+          <div class="add"><button class="btn btn-primary add-to-cart">Adicionar</button></div>
+        </article>
+        <!-- Card 4 -->
+        <article class="card" data-name="Café Expresso" data-price="4.50">
+          <div class="thumb">Café</div>
+          <div class="content">
+            <h4>Café Expresso</h4>
+            <p class="price">R$ 4,50</p>
+          </div>
+          <div class="add"><button class="btn btn-primary add-to-cart">Adicionar</button></div>
+        </article>
+        <!-- Card 5 -->
+        <article class="card" data-name="Batata Chips" data-price="8.90">
+          <div class="thumb">Chips</div>
+          <div class="content">
+            <h4>Batata Chips 90g</h4>
+            <p class="price">R$ 8,90</p>
+          </div>
+          <div class="add"><button class="btn btn-primary add-to-cart">Adicionar</button></div>
+        </article>
+        <!-- Card 6 -->
+        <article class="card" data-name="Chocolate 90g" data-price="7.50">
+          <div class="thumb">Chocolate</div>
+          <div class="content">
+            <h4>Chocolate 90g</h4>
+            <p class="price">R$ 7,50</p>
+          </div>
+          <div class="add"><button class="btn btn-primary add-to-cart">Adicionar</button></div>
+        </article>
+        <!-- Card 7 -->
+        <article class="card" data-name="Energético 250ml" data-price="9.90">
+          <div class="thumb">Energético</div>
+          <div class="content">
+            <h4>Energético 250ml</h4>
+            <p class="price">R$ 9,90</p>
+          </div>
+          <div class="add"><button class="btn btn-primary add-to-cart">Adicionar</button></div>
+        </article>
+        <!-- Card 8 -->
+        <article class="card" data-name="Bala Sortida" data-price="2.50">
+          <div class="thumb">Balas</div>
+          <div class="content">
+            <h4>Balas Sortidas</h4>
+            <p class="price">R$ 2,50</p>
+          </div>
+          <div class="add"><button class="btn btn-primary add-to-cart">Adicionar</button></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- OFERTAS -->
+    <section id="ofertas" class="py-16 bg-[#f3e6d1] px-6 md:px-12">
+      <h3 class="section-title">Ofertas da semana</h3>
+      <div class="grid offers">
+        <div class="offer">
+          <span class="badge">-20%</span>
+          <h4>Combo Café + Pão de Queijo</h4>
+          <p class="muted">Comece o dia com energia. De R$ 8,90 por <strong>R$ 7,10</strong>.</p>
+          <button class="btn btn-primary">Quero o combo</button>
+        </div>
+        <div class="offer">
+          <span class="badge">-30%</span>
+          <h4>2 Latas de Refrigerante</h4>
+          <p class="muted">Leve 2 e economize. De R$ 13,00 por <strong>R$ 9,10</strong>.</p>
+          <button class="btn btn-primary">Aproveitar</button>
+        </div>
+        <div class="offer">
+          <span class="badge">-15%</span>
+          <h4>Snacks Selecionados</h4>
+          <p class="muted">Chips, amendoim e mais com desconto.</p>
+          <button class="btn btn-primary">Ver snacks</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="py-16 px-6 md:px-12 text-center">
+      <h3 class="section-title">Sobre a Marcelinos</h3>
+      <div class="split">
+        <div class="photo" aria-hidden="true"></div>
+        <div>
+          <p>Somos a <strong>Marcelinos Conveniência</strong>, sua parada rápida em <strong>Monte Alto</strong>. Aqui você encontra desde aquele café quentinho até itens essenciais para o dia a dia — tudo com praticidade, atendimento cordial e preço justo.</p>
+          <p>Funcionamos <strong>24 horas</strong>. Vem nos visitar e aproveite as ofertas da semana!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="py-16 bg-[#f3e6d1] px-6 md:px-12">
+      <h3 class="section-title">Contato & Localização</h3>
+      <div class="split">
+        <div>
+          <p><strong>Endereço:</strong> Centro, Monte Alto — SP</p>
+          <p><strong>Horário:</strong> 24h, todos os dias</p>
+          <p><strong>Telefone/WhatsApp:</strong> <a href="https://wa.me/5500000000000" target="_blank" rel="noopener">(00) 00000-0000</a></p>
+          <p class="muted">Clique para falar no WhatsApp e fazer seu pedido.</p>
+        </div>
+        <div>
+          <iframe title="Mapa Monte Alto" style="width:100%; aspect-ratio:16/9; border:0; border-radius:var(--radius); box-shadow:var(--shadow)" loading="lazy" allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14883.799751059075!2d-48.509!3d-21.262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8d9f5ab0b3f09%3A0x9a6f8e1d1f3a9f5!2sMonte%20Alto%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1680000000000"></iframe>
+        </div>
+      </div>
+    </section>
+
+   <footer class="bg-[#AB650A] text-white py-10 px-6 md:px-12 mt-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h4 class="font-bold mb-4">Marcelinos Conveniência</h4>
+          <p>Sua loja de conveniência em Monte Alto. Atendimento rápido e produtos de qualidade.</p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Links Rápidos</h4>
+          <ul class="space-y-2">
+            <li><a href="#home" class="hover:underline">Início</a></li>
+            <li><a href="#produtos" class="hover:underline">Produtos</a></li>
+            <li><a href="#ofertas" class="hover:underline">Ofertas</a></li>
+            <li><a href="#sobre" class="hover:underline">Sobre</a></li>
+            <li><a href="#contato" class="hover:underline">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Redes Sociais</h4>
+          <div class="flex gap-4">
+            <a href="#" class="hover:text-yellow-300">📘</a>
+            <a href="#" class="hover:text-yellow-300">📸</a>
+            <a href="#" class="hover:text-yellow-300">💬</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-8 text-sm">© 2025 Marcelinos Conveniência - Todos os direitos reservados</div>
+    </footer>
+
+  </main>
+  <!-- Carrinho -->
+  <aside class="cart" id="cart" aria-label="Carrinho de compras" aria-hidden="true">
+    <header>
+      <div class="nav container">
+        <strong>Carrinho</strong>
+        <button class="btn btn-outline" id="closeCart">Fechar</button>
+      </div>
+    </header>
+    <div class="cart-items" id="cartItems" role="list"></div>
+    <footer>
+      <div class="container cart-total">
+        <span>Total</span>
+        <span id="cartTotal">R$ 0,00</span>
+      </div>
+    </footer>
+  </aside>
+</main>
+  <script>
+    // Ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile drawer
+    const btnMenu = document.getElementById('btnMenu');
+    const drawer = document.getElementById('drawer');
+    btnMenu?.addEventListener('click', () => {
+      const open = drawer.classList.toggle('open');
+      btnMenu.setAttribute('aria-expanded', String(open));
+    });
+    drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+
+    // Carrinho simples (front-end demo)
+    const cart = document.getElementById('cart');
+    const openCart = document.getElementById('openCart');
+    const closeCart = document.getElementById('closeCart');
+    const list = document.getElementById('cartItems');
+    const totalEl = document.getElementById('cartTotal');
+    const state = { items: [] };
+
+    const formatBRL = (n)=> n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    function renderCart(){
+      list.innerHTML = '';
+      let total = 0;
+      state.items.forEach((it, idx)=>{
+        total += it.price * it.qty;
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `
+          <div style="width:56px; height:56px; border-radius:10px; background:linear-gradient(135deg,#ffe6b8,#fff3d6);"></div>
+          <div>
+            <div style="font-weight:700">${it.name}</div>
+            <div class="muted">${formatBRL(it.price)} × ${it.qty}</div>
+          </div>
+          <div style="display:flex; gap:.25rem; align-items:center">
+            <button aria-label="Diminuir" class="btn btn-outline" data-act="dec" data-idx="${idx}">−</button>
+            <button aria-label="Aumentar" class="btn btn-outline" data-act="inc" data-idx="${idx}">+</button>
+            <button aria-label="Remover" class="btn btn-primary" data-act="del" data-idx="${idx}">Remover</button>
+          </div>`;
+        list.appendChild(row);
+      });
+      totalEl.textContent = formatBRL(total);
+    }
+    document.body.addEventListener('click', (e)=>{
+      const t = e.target;
+      if(!(t instanceof Element)) return;
+      if(t.classList.contains('add-to-cart')){
+        const card = t.closest('.card');
+        const name = card.dataset.name;
+        const price = parseFloat(card.dataset.price);
+        const found = state.items.find(i=>i.name===name);
+        if(found) found.qty += 1; else state.items.push({ name, price, qty:1 });
+        renderCart(); cart.classList.add('open'); cart.setAttribute('aria-hidden','false');
+        return;
+      }
+      if(t.id==='openCart'){ cart.classList.add('open'); cart.setAttribute('aria-hidden','false'); }
+      if(t.id==='closeCart'){ cart.classList.remove('open'); cart.setAttribute('aria-hidden','true'); }
+      if(t.dataset.act){
+        const i = Number(t.dataset.idx);
+        if(t.dataset.act==='inc') state.items[i].qty += 1;
+        if(t.dataset.act==='dec') state.items[i].qty = Math.max(1, state.items[i].qty - 1);
+        if(t.dataset.act==='del') state.items.splice(i,1);
+        renderCart();
+      }
+    });
+  </script>
+</body>
+</html>
